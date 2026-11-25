@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Maze Escape</title>
 <style>
-body{background:#101827;color:#e2e8f0;font:16px system-ui;text-align:center;margin:24px}canvas{width:min(90vw,480px);height:auto;background:#182438;border-radius:8px}button{background:#5eead4;color:#102030;border:0;padding:12px 18px;border-radius:8px;margin:4px;font-weight:bold}p{color:#a5b4c8}
+body{background:#101827;color:#e2e8f0;font:16px system-ui;text-align:center;margin:24px}canvas{width:min(100%,480px);height:auto;background:#182438;border-radius:8px}button{background:#5eead4;color:#102030;border:0;padding:12px 18px;border-radius:8px;margin:4px;font-weight:bold}p{color:#a5b4c8}
 </style>
 <h1>Maze Escape</h1><p>Find the gold exit. Use arrow keys or the controls.</p><canvas id="board" width="480" height="480" aria-label="Maze game"></canvas><p id="status" aria-live="polite"></p><button id="new">New maze</button><div id="controls"><button data-d="0">↑</button><button data-d="3">←</button><button data-d="2">↓</button><button data-d="1">→</button></div>
 <script src="maze.js"></script><script>
 const size=15, unit=32, ctx=document.querySelector("canvas").getContext("2d");
 let maze, pos, moves, won;
-const status=document.querySelector("#status");
+const statusText=document.querySelector("#status");
 function draw(){
  ctx.clearRect(0,0,480,480);ctx.strokeStyle="#94a3b8";ctx.lineWidth=2;
  maze.forEach((walls,i)=>{const x=i%size*unit,y=Math.floor(i/size)*unit;
@@ -15,7 +15,7 @@ function draw(){
  walls.forEach((w,d)=>{if(w){ctx.beginPath();ctx.moveTo(...edges[d].slice(0,2));ctx.lineTo(...edges[d].slice(2));ctx.stroke();}});});
  ctx.fillStyle="#fbbf24";ctx.fillRect(452,452,24,24);
  ctx.fillStyle="#5eead4";ctx.beginPath();ctx.arc(pos%size*unit+16,Math.floor(pos/size)*unit+16,10,0,Math.PI*2);ctx.fill();
- status.textContent=won?"Escaped in "+moves+" moves!":"Moves: "+moves;
+ statusText.textContent=won?"Escaped in "+moves+" moves!":"Moves: "+moves;
 }
 function reset(){maze=generateMaze(size);pos=0;moves=0;won=false;draw();}
 function move(d){if(won||maze[pos][d])return;pos+=[-size,1,size,-1][d];moves++;won=pos===size*size-1;draw();}
