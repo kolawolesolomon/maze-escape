@@ -28,3 +28,7 @@ Generation tests cover connectivity, reciprocal walls, closed borders, absence o
 ## Limitations
 
 The board currently uses a fixed 15×15 size and keeps progress in memory for the current page.
+
+## Screenshot
+
+Open the latest successful [Actions run](https://github.com/kolawolesolomon/maze-escape/actions/workflows/tests.yml) and download `maze-escape-preview` from **Artifacts** to see a screenshot captured from the running application.
